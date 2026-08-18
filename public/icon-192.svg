@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#064e3b" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Rounded Base Chassis (Android Adaptive Icon Safezone) -->
+  <rect width="192" height="192" rx="42" fill="url(#bgGrad)" />
+  <rect x="4" y="4" width="184" height="184" rx="38" fill="none" stroke="#1e293b" stroke-width="3" />
+  
+  <!-- Subtle Glow -->
+  <circle cx="96" cy="96" r="60" fill="url(#glowGrad)" />
+
+  <!-- Shield / Vault / Cashier Emblem -->
+  <path d="M96 36 L144 54 V96 C144 126 122 152 96 160 C70 152 48 126 48 96 V54 Z" fill="#0f172a" stroke="url(#emeraldGrad)" stroke-width="6" stroke-linejoin="round" />
+  
+  <!-- Receipt / Currency Note Symbol in Center -->
+  <rect x="74" y="68" width="44" height="56" rx="6" fill="#1e293b" stroke="#34d399" stroke-width="4" />
+  
+  <!-- Cash Lines / Spark -->
+  <line x1="82" y1="80" x2="110" y2="80" stroke="#34d399" stroke-width="3" stroke-linecap="round" />
+  <line x1="82" y1="92" x2="104" y2="92" stroke="#34d399" stroke-width="3" stroke-linecap="round" />
+  <line x1="82" y1="104" x2="110" y2="104" stroke="#34d399" stroke-width="3" stroke-linecap="round" />
+  
+  <!-- Badge Dot -->
+  <circle cx="136" cy="56" r="8" fill="#10b981" />
+</svg>

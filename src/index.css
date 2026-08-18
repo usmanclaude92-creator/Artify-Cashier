@@ -1,0 +1,225 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+/* =========================================================================
+   LIGHT THEME MODE OVERRIDES (.theme-light)
+   Provides high contrast, crisp outdoor readability on site
+   ========================================================================= */
+.theme-light {
+  color-scheme: light;
+}
+
+.theme-light body {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+.theme-light .bg-slate-950 {
+  background-color: #f8fafc !important;
+}
+
+.theme-light .bg-slate-900 {
+  background-color: #ffffff !important;
+}
+
+.theme-light .bg-slate-900\/90,
+.theme-light .bg-slate-900\/80,
+.theme-light .bg-slate-900\/70,
+.theme-light .bg-slate-900\/60,
+.theme-light .bg-slate-900\/50,
+.theme-light .bg-slate-900\/40 {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+.theme-light .bg-slate-950\/90,
+.theme-light .bg-slate-950\/80,
+.theme-light .bg-slate-950\/70,
+.theme-light .bg-slate-950\/60 {
+  background-color: #f1f5f9 !important;
+}
+
+.theme-light .bg-slate-800 {
+  background-color: #f1f5f9 !important;
+}
+
+.theme-light .bg-slate-800\/90,
+.theme-light .bg-slate-800\/80,
+.theme-light .bg-slate-800\/70,
+.theme-light .bg-slate-800\/60,
+.theme-light .bg-slate-800\/50 {
+  background-color: #f8fafc !important;
+}
+
+.theme-light .hover\:bg-slate-800:hover,
+.theme-light .hover\:bg-slate-800\/60:hover,
+.theme-light .hover\:bg-slate-800\/50:hover,
+.theme-light .hover\:bg-slate-800\/70:hover {
+  background-color: #e2e8f0 !important;
+}
+
+.theme-light .border-slate-800,
+.theme-light .border-slate-800\/90,
+.theme-light .border-slate-800\/80,
+.theme-light .border-slate-800\/70,
+.theme-light .border-slate-700,
+.theme-light .border-slate-700\/60,
+.theme-light .border-slate-700\/50 {
+  border-color: #e2e8f0 !important;
+}
+
+.theme-light .hover\:border-slate-700:hover {
+  border-color: #cbd5e1 !important;
+}
+
+.theme-light .text-slate-100,
+.theme-light .text-slate-200,
+.theme-light .text-white {
+  color: #0f172a !important;
+}
+
+.theme-light .text-slate-300 {
+  color: #1e293b !important;
+}
+
+.theme-light .text-slate-400 {
+  color: #475569 !important;
+}
+
+.theme-light .text-slate-500 {
+  color: #64748b !important;
+}
+
+.theme-light .text-slate-600 {
+  color: #94a3b8 !important;
+}
+
+/* Light mode Form Inputs & Selects */
+.theme-light input[type="text"],
+.theme-light input[type="number"],
+.theme-light input[type="date"],
+.theme-light input[type="password"],
+.theme-light select,
+.theme-light textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+.theme-light input::placeholder,
+.theme-light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Semantic tinted badges & cards */
+.theme-light .bg-emerald-950\/90,
+.theme-light .bg-emerald-950\/80,
+.theme-light .bg-emerald-950\/60,
+.theme-light .bg-emerald-950\/40,
+.theme-light .bg-emerald-950\/30,
+.theme-light .bg-emerald-950 {
+  background-color: #ecfdf5 !important;
+}
+
+.theme-light .text-emerald-400,
+.theme-light .text-emerald-300 {
+  color: #047857 !important;
+}
+
+.theme-light .bg-amber-950\/90,
+.theme-light .bg-amber-950\/80,
+.theme-light .bg-amber-950\/70,
+.theme-light .bg-amber-950\/60,
+.theme-light .bg-amber-950\/40,
+.theme-light .bg-amber-950\/30,
+.theme-light .bg-amber-950 {
+  background-color: #fffbeb !important;
+}
+
+.theme-light .text-amber-400,
+.theme-light .text-amber-300 {
+  color: #b45309 !important;
+}
+
+.theme-light .bg-rose-950\/90,
+.theme-light .bg-rose-950\/80,
+.theme-light .bg-rose-950\/60,
+.theme-light .bg-rose-950\/40,
+.theme-light .bg-rose-950\/20,
+.theme-light .bg-rose-950 {
+  background-color: #fff1f2 !important;
+}
+
+.theme-light .text-rose-400,
+.theme-light .text-rose-300 {
+  color: #be123c !important;
+}
+
+.theme-light .bg-blue-950\/90,
+.theme-light .bg-blue-950\/80,
+.theme-light .bg-blue-950\/60,
+.theme-light .bg-blue-950\/40,
+.theme-light .bg-blue-950\/30,
+.theme-light .bg-blue-950 {
+  background-color: #eff6ff !important;
+}
+
+.theme-light .text-blue-400,
+.theme-light .text-blue-300 {
+  color: #1d4ed8 !important;
+}
+
+.theme-light .bg-purple-950\/90,
+.theme-light .bg-purple-950\/80 {
+  background-color: #f5f3ff !important;
+}
+
+/* Phone Frame border in light mode */
+.theme-light .border-slate-800 {
+  border-color: #cbd5e1 !important;
+}
+
+/* Print styling for PDF report */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 11pt;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .page-break-after {
+    page-break-after: always;
+  }
+  .page-break-inside-avoid {
+    page-break-inside: avoid;
+  }
+}

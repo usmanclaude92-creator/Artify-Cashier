@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="glowGrad512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#064e3b" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad512)" />
+  <rect x="12" y="12" width="488" height="488" rx="100" fill="none" stroke="#1e293b" stroke-width="8" />
+  
+  <circle cx="256" cy="256" r="160" fill="url(#glowGrad512)" />
+
+  <path d="M256 96 L384 144 V256 C384 336 325 405 256 426 C187 405 128 336 128 256 V144 Z" fill="#0f172a" stroke="url(#emeraldGrad512)" stroke-width="16" stroke-linejoin="round" />
+  
+  <rect x="197" y="181" width="118" height="150" rx="16" fill="#1e293b" stroke="#34d399" stroke-width="10" />
+  
+  <line x1="218" y1="213" x2="294" y2="213" stroke="#34d399" stroke-width="8" stroke-linecap="round" />
+  <line x1="218" y1="245" x2="278" y2="245" stroke="#34d399" stroke-width="8" stroke-linecap="round" />
+  <line x1="218" y1="277" x2="294" y2="277" stroke="#34d399" stroke-width="8" stroke-linecap="round" />
+  
+  <circle cx="362" cy="149" r="22" fill="#10b981" />
+</svg>

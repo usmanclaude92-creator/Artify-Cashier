@@ -1,0 +1,10 @@
+{
+  "name": "Remix Artify Cashier",
+  "description": "Comprehensive Android petty cash cashier app with OCR bill scanning, VAT tracking, fund batch requests, self/manager approval workflows, and PDF closure reporting.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
