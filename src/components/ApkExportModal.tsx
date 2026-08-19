@@ -632,7 +632,21 @@ echo "📂 android/app/build/outputs/apk/debug/app-debug.apk"
               </div>
 
               {/* Downloadable Project Assets */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <button
+                  onClick={() => downloadFile('ANDROID_APP_SPECIFICATION.md', `# Artify Cashier — Native Android App Design & Architecture Specification\n... (See full document in project root)`)}
+                  className="p-3 bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-emerald-500/40 rounded-2xl text-left transition-all group cursor-pointer"
+                >
+                  <div className="p-2 rounded-xl bg-slate-900 text-purple-400 w-fit mb-2 group-hover:scale-105 transition-transform">
+                    <FileCode className="w-4 h-4" />
+                  </div>
+                  <div className="text-xs font-bold text-slate-200">ANDROID_SPEC.md</div>
+                  <p className="text-[10px] text-slate-500 mt-0.5">Google AI Studio Spec</p>
+                  <span className="text-[10px] font-bold text-purple-400 flex items-center gap-1 mt-2">
+                    <Download className="w-3 h-3" /> Download Spec
+                  </span>
+                </button>
+
                 <button
                   onClick={() => downloadFile('capacitor.config.json', capacitorConfigText)}
                   className="p-3 bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-emerald-500/40 rounded-2xl text-left transition-all group cursor-pointer"

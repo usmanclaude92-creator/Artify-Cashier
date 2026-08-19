@@ -42,6 +42,203 @@ async function startServer() {
     });
   });
 
+  // Direct Android Specification Download Endpoint (.md)
+  app.get(["/api/download/android-spec", "/ANDROID_APP_SPECIFICATION.md", "/android-spec.md"], (_req, res) => {
+    try {
+      const specPath = path.join(process.cwd(), "ANDROID_APP_SPECIFICATION.md");
+      res.setHeader("Content-Type", "text/markdown; charset=utf-8");
+      res.setHeader("Content-Disposition", 'attachment; filename="ANDROID_APP_SPECIFICATION.md"');
+      return res.sendFile(specPath);
+    } catch (err: any) {
+      console.error("Specification download error:", err);
+      return res.status(500).json({ error: "Failed to download specification", details: err.message });
+    }
+  });
+
+  // Direct Android Studio Project ZIP Download Endpoint
+  app.get(["/api/download-zip", "/ArtifyCashier-AndroidStudio.zip"], async (_req, res) => {
+    try {
+      const zip = new JSZip();
+
+      // Root Gradle files
+      zip.file(
+        "build.gradle",
+        `// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.2'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+`
+      );
+
+      zip.file(
+        "settings.gradle",
+        `include ':app'
+rootProject.name = "ArtifyCashier"
+`
+      );
+
+      zip.file(
+        "gradle.properties",
+        `org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8
+android.useAndroidX=true
+android.enableJetifier=true
+`
+      );
+
+      // App build.gradle
+      zip.file(
+        "app/build.gradle",
+        `apply plugin: 'com.android.application'
+
+android {
+    namespace 'com.artify.cashier'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.artify.cashier"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.camera:camera-camera2:1.3.1'
+    implementation 'androidx.camera:camera-lifecycle:1.3.1'
+    implementation 'androidx.camera:camera-view:1.3.1'
+}
+`
+      );
+
+      // Java MainActivity
+      zip.file(
+        "app/src/main/java/com/artify/cashier/MainActivity.java",
+        `package com.artify.cashier;
+
+import android.os.Bundle;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    private WebView webView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        webView = new WebView(this);
+        setContentView(webView);
+
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setAllowFileAccess(true);
+        settings.setMediaPlaybackRequiresUserGesture(false);
+
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl("file:///android_asset/public/index.html");
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+}
+`
+      );
+
+      // AndroidManifest.xml
+      zip.file(
+        "app/src/main/AndroidManifest.xml",
+        `<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.artify.cashier">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Artify Cashier"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>`
+      );
+
+      // Include the Android Spec inside the ZIP
+      const specContent = require("fs").readFileSync(path.join(process.cwd(), "ANDROID_APP_SPECIFICATION.md"), "utf-8");
+      zip.file("ANDROID_APP_SPECIFICATION.md", specContent);
+
+      const buffer = await zip.generateAsync({
+        type: "nodebuffer",
+        compression: "DEFLATE",
+        compressionOptions: { level: 6 },
+      });
+
+      res.setHeader("Content-Type", "application/zip");
+      res.setHeader("Content-Disposition", 'attachment; filename="ArtifyCashier-AndroidStudio.zip"');
+      res.setHeader("Content-Length", buffer.length);
+      return res.send(buffer);
+    } catch (err: any) {
+      console.error("ZIP project generation error:", err);
+      return res.status(500).json({ error: "Failed to generate project ZIP", details: err.message });
+    }
+  });
+
   // Direct APK Download Endpoint
   app.get(["/api/download-apk", "/ArtifyCashier.apk", "/ArtifyCashier-v1.0.0.apk"], async (_req, res) => {
     try {
